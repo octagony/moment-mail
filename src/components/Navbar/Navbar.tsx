@@ -1,0 +1,23 @@
+"use client";
+
+import Link from "next/link";
+
+export default function Navbar() {
+	return (
+		<nav className="bg-white border-gray-200 dark:bg-gray-900 border-b-2 p-4">
+			<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
+				<Link href="/">
+					<span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+						Moment Mail
+					</span>
+				</Link>
+				<div className="hidden w-full md:block md:w-auto" id="navbar-default">
+					<ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	);
+}

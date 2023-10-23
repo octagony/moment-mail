@@ -1,12 +1,10 @@
-import { Button } from "@/components/ui/button";
+import Navbar from "@/components/Navbar/Navbar";
 
 export default function Home() {
-  return (
-     <>
-          <h1>Hello from Next.js 13</h1>
-          <Button>
-               Hello
-          </Button>
-     </>
-  )
+	return (
+		<>
+			<Navbar />
+			<div className="container p-4"></div>
+		</>
+	);
 }
