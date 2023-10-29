@@ -10,18 +10,23 @@ import { RefreshCcw } from "lucide-react";
 
 export default function MailPicker() {
   const { email, mutate } = useMailPicker(generateRandomEmail);
+  const [splitDomain, setSplitDomain] = useState<Array<string>>();
+
+  useEffect(() => {
+    setSplitDomain((prev) => email[0].split("@"));
+  }, [email]);
+
+  const getNewMail = async () => {
+    await mutate(generateRandomEmail);
+  };
+
   return (
     <>
       <div className="flex items-center flex-col gap-2">
         <span>Your email is</span>
         <div className="flex w-full max-w-sm items-center space-x-2">
           <Input placeholder="Email" value={email} />
-          <Button
-            type="submit"
-            onClick={async () => {
-              await mutate(generateRandomEmail);
-            }}
-          >
+          <Button type="submit" onClick={getNewMail}>
             <RefreshCcw />
           </Button>
         </div>
