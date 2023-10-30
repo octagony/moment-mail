@@ -14,11 +14,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { MoveRight, Trash2 } from "lucide-react";
 import useMails from "@/hooks/useMails";
+import { useMailStore } from "@/store/mailStore";
 
 export default function MailList() {
-  const { mails } = useMails<IMail[]>("5i9na7a1xbs", "txcct.com");
+  const [mail, domains] = useMailStore((store) => [
+    store.email,
+    store.domainInfo,
+  ]);
+  const { mails } = useMails<IMail[]>(domains?.at(0)!, domains?.at(1)!);
   return (
     <div className="flex flex-col gap-8">
+      <p>Now email is: {mail} </p>
+      <p>And domains is : {domains?.map((d) => <li>{d}</li>)}</p>
       {mails?.map((mail) => (
         <Card className="w-[350px]">
           <CardHeader>
