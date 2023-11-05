@@ -25,27 +25,28 @@ export default function MailList() {
   return (
     <div className="flex flex-col gap-8">
       <p>Now email is: {mail} </p>
-      <p>And domains is : {domains?.map((d) => <li>{d}</li>)}</p>
-      {mails?.map((mail) => (
-        <Card className="w-[350px]">
-          <CardHeader>
-            <CardTitle>{mail.subject}</CardTitle>
-            <CardDescription>
-              From: {mail.from.split("@").at(1)}
-            </CardDescription>
-          </CardHeader>
-          <CardFooter className="flex justify-between">
-            <Button variant="outline">
-              <Trash2 className="mr-2" />
-              Delete
-            </Button>
-            <Button>
-              Open
-              <MoveRight className="ml-2" />
-            </Button>
-          </CardFooter>
-        </Card>
-      ))}
+      <div className="flex flex-row flex-wrap gap-4 justify-center align-center">
+        {mails?.map((mail) => (
+          <Card className="w-1/4">
+            <CardHeader>
+              <CardTitle>{mail.subject}</CardTitle>
+              <CardDescription>
+                From: {mail.from.split("@").at(1)}
+              </CardDescription>
+            </CardHeader>
+            <CardFooter className="flex justify-between">
+              <Button variant="outline">
+                <Trash2 className="mr-2" />
+                Delete
+              </Button>
+              <Button onClick={() => console.log(mail.id)}>
+                Open
+                <MoveRight className="ml-2" />
+              </Button>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }
