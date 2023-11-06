@@ -21,6 +21,7 @@ export default function MailPicker() {
   });
 
   const mail = useMailStore((store) => store.email);
+  console.log(mail);
 
   //TODO:FIX types
   const getNewMail = async () => {

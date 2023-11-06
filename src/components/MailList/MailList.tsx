@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { MoveRight, Trash2 } from "lucide-react";
 import useMails from "@/hooks/useMails";
 import { useMailStore } from "@/store/mailStore";
+import Link from "next/link";
 
 export default function MailList() {
   const [mail, domains] = useMailStore((store) => [
@@ -39,8 +40,8 @@ export default function MailList() {
                 <Trash2 className="mr-2" />
                 Delete
               </Button>
-              <Button onClick={() => console.log(mail.id)}>
-                Open
+              <Button>
+                <Link href={`/mail/${mail.id}`}>Open</Link>
                 <MoveRight className="ml-2" />
               </Button>
             </CardFooter>
