@@ -22,10 +22,11 @@ import {
   ChevronDownCircle,
   Frown,
 } from "lucide-react";
+import axios from "axios";
+import { axiosDownloadFile } from "@/utils/downloadHelper";
 
 export default function Mail({ params }: { params: { id: number } }) {
   const domainInfo = useMailStore((store) => store.domainInfo);
-  const mailRef = useRef<HTMLDivElement | null>(null);
   const { mail } = useOneMail<IMessage>(
     domainInfo?.at(0)!,
     domainInfo?.at(1)!,
@@ -38,11 +39,28 @@ export default function Mail({ params }: { params: { id: number } }) {
     return dj.format("DD/MM/YYYY");
   };
 
+  const downloadAttachment = async (fileName: string) => {
+    const createFileNameForUrl = fileName.replaceAll(/ /g, "%20");
+    const url = `https://www.1secmail.com/api/v1/?action=download&login=${domainInfo.at(
+      0,
+    )!}&domain=${domainInfo.at(1)!}&id=${
+      params.id
+    }&file=${createFileNameForUrl}`;
+    try {
+      axiosDownloadFile(url, fileName);
+    } catch (error: unknown) {
+      if (error instanceof TypeError) {
+        console.log(error?.message);
+      }
+    }
+  };
+
   return (
     <div className="container mt-8">
       <Button variant="outline">
         <Link href="/">Go back</Link>
       </Button>
+      {/*TODO:Migrate menubar to separate component*/}
       <Menubar className="mt-4">
         <MenubarMenu>
           <MenubarTrigger>
@@ -50,7 +68,7 @@ export default function Mail({ params }: { params: { id: number } }) {
             {mail?.from.split("@").at(0)}
           </MenubarTrigger>
           <MenubarContent>
-            <MenubarItem>From:{mail?.from}</MenubarItem>
+            <MenubarItem>From: {mail?.from}</MenubarItem>
           </MenubarContent>
         </MenubarMenu>
         <MenubarMenu>
@@ -65,7 +83,11 @@ export default function Mail({ params }: { params: { id: number } }) {
           <MenubarContent>
             {mail?.attachments.length ? (
               mail?.attachments.map((attachment) => (
-                <MenubarItem>{attachment.filename}</MenubarItem>
+                <MenubarItem
+                  onClick={() => downloadAttachment(attachment.filename)}
+                >
+                  {attachment.filename}
+                </MenubarItem>
               ))
             ) : (
               <MenubarItem>
@@ -76,6 +98,7 @@ export default function Mail({ params }: { params: { id: number } }) {
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
+      {/*TODO:Add new styles to message*/}
       <div className="mt-4 p-2">
         <div
           className="max-h-10"

@@ -13,11 +13,15 @@ import { useTheme } from "next-themes";
 
 export default function Navbar() {
   const { setTheme } = useTheme();
+  {
+    /*TODO: Added more items in navbar*/
+  }
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 border-b-2 p-4">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
         <Link href="/">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            {/*TODO: Change logo*/}
             Moment Mail
           </span>
         </Link>

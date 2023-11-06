@@ -24,9 +24,9 @@ export default function MailList() {
   ]);
   const { mails } = useMails<IMail[]>(domains?.at(0)!, domains?.at(1)!);
   return (
-    <div className="flex flex-col gap-8">
-      <p>Now email is: {mail} </p>
+    <div className="mt-12 flex flex-col gap-8">
       <div className="flex flex-row flex-wrap gap-4 justify-center align-center">
+        {/*TODO: Add spinner, change layout*/}
         {mails?.map((mail) => (
           <Card className="w-1/4">
             <CardHeader>
@@ -36,6 +36,7 @@ export default function MailList() {
               </CardDescription>
             </CardHeader>
             <CardFooter className="flex justify-between">
+              {/*TODO: Implement delete mail logic*/}
               <Button variant="outline">
                 <Trash2 className="mr-2" />
                 Delete
