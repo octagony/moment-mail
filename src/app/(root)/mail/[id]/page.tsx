@@ -12,11 +12,16 @@ import {
   MenubarContent,
   MenubarItem,
   MenubarMenu,
-  MenubarSeparator,
   MenubarShortcut,
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import dayjs from "dayjs";
+import {
+  ArrowRightFromLine,
+  Calendar,
+  ChevronDownCircle,
+  Frown,
+} from "lucide-react";
 
 export default function Mail({ params }: { params: { id: number } }) {
   const domainInfo = useMailStore((store) => store.domainInfo);
@@ -38,10 +43,37 @@ export default function Mail({ params }: { params: { id: number } }) {
       <Button variant="outline">
         <Link href="/">Go back</Link>
       </Button>
-      <Menubar>
+      <Menubar className="mt-4">
         <MenubarMenu>
-          <MenubarTrigger>From: {mail?.from}</MenubarTrigger>
-          <MenubarTrigger>Date: {formatDate()}</MenubarTrigger>
+          <MenubarTrigger>
+            <ArrowRightFromLine size={18} className="mr-2" />{" "}
+            {mail?.from.split("@").at(0)}
+          </MenubarTrigger>
+          <MenubarContent>
+            <MenubarItem>From:{mail?.from}</MenubarItem>
+          </MenubarContent>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger>
+            <Calendar size={18} className="mr-2" /> {formatDate()}
+          </MenubarTrigger>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger>
+            Attachments <ChevronDownCircle className="ml-2" size={18} />
+          </MenubarTrigger>
+          <MenubarContent>
+            {mail?.attachments.length ? (
+              mail?.attachments.map((attachment) => (
+                <MenubarItem>{attachment.filename}</MenubarItem>
+              ))
+            ) : (
+              <MenubarItem>
+                <Frown size={18} className="mr-2" />
+                Empty
+              </MenubarItem>
+            )}
+          </MenubarContent>
         </MenubarMenu>
       </Menubar>
       <div className="mt-4 p-2">
