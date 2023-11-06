@@ -40,10 +40,12 @@ export default function MailList() {
                 <Trash2 className="mr-2" />
                 Delete
               </Button>
-              <Button>
-                <Link href={`/mail/${mail.id}`}>Open</Link>
-                <MoveRight className="ml-2" />
-              </Button>
+              <Link href={`/mail/${mail.id}`}>
+                <Button>
+                  Open
+                  <MoveRight className="ml-2" />
+                </Button>
+              </Link>
             </CardFooter>
           </Card>
         ))}
