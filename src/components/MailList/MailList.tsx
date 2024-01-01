@@ -39,11 +39,11 @@ export default function MailList() {
 
   const { mails } = useMails<IMail[]>(domains?.at(0)!, domains?.at(1)!);
 
-  useEffect(() => {
-    if (mails) {
-      setMailList(mails);
-    }
-  });
+  // useEffect(() => {
+  //   if (mails) {
+  //     setMailList(mails);
+  //   }
+  // });
 
   const handleDeleteMail = (deleteMailId: number) => {
     const updatedMails = mailList?.filter((mail) => mail.id !== deleteMailId);
@@ -66,10 +66,7 @@ export default function MailList() {
             <CardFooter className="flex justify-between">
               <AlertDialog>
                 <AlertDialogTrigger>
-                  <Button
-                    variant="outline"
-                    onClick={() => handleDeleteMail(mail.id)}
-                  >
+                  <Button variant="outline">
                     <Trash2 className="mr-2" />
                     Delete
                   </Button>

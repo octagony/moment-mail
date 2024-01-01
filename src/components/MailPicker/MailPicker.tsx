@@ -6,12 +6,14 @@ import useSWR, { useSWRConfig } from "swr";
 import useMailPicker from "@/hooks/useMailPicker";
 import { generateRandomEmail } from "@/utils/urlConstants";
 import { Button } from "../ui/button";
-import { RefreshCcw } from "lucide-react";
+import { RefreshCcw, Clipboard } from "lucide-react";
 import { useMailStore } from "@/store/mailStore";
+import { useToast } from "../ui/use-toast";
 
 export default function MailPicker() {
   const { emailServer, mutate } = useMailPicker(generateRandomEmail);
   const [splitDomain, setSplitDomain] = useState<Array<string>>();
+  const { toast } = useToast();
 
   useEffect(() => {
     useMailStore.setState({
@@ -21,7 +23,6 @@ export default function MailPicker() {
   });
 
   const mail = useMailStore((store) => store.email);
-  console.log(mail);
 
   //TODO:FIX types
   const getNewMail = async () => {
@@ -32,15 +33,39 @@ export default function MailPicker() {
     });
   };
 
+  const handleCopyToClipboard = () => {
+    try {
+      navigator.clipboard.writeText(mail);
+      toast({
+        description: "Successfully copied to clipboard",
+      });
+    } catch (error) {
+      toast({
+        description: "Oh, something went wrong",
+      });
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="flex items-center flex-col gap-2">
         <span>Your email is</span>
         <div className="flex w-full max-w-sm items-center space-x-2">
           {/*TODO:Change input to another component*/}
-          <Input placeholder="Email" value={mail} />
-          <Button type="submit" onClick={getNewMail}>
+          <Input placeholder="Email" value={mail} onChange={() => {}} />
+          <Button
+            type="submit"
+            onClick={() => {
+              toast({
+                description: "test",
+              });
+            }}
+          >
             <RefreshCcw />
+          </Button>
+          <Button onClick={handleCopyToClipboard}>
+            <Clipboard />
           </Button>
         </div>
       </div>
