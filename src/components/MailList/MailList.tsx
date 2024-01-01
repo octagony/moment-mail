@@ -7,27 +7,15 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
-import { MoveRight, Trash2 } from "lucide-react";
 import useMails from "@/hooks/useMails";
 import { useMailStore } from "@/store/mailStore";
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useState } from "react";
+import ActionButtons from "../ActionButtons/ActionButtons";
 
 export default function MailList() {
   const [mail, domains] = useMailStore((store) => [
@@ -55,7 +43,7 @@ export default function MailList() {
     <div className="mt-12 flex flex-col gap-8">
       <div className="flex flex-row flex-wrap gap-4 justify-center align-center">
         {/*TODO: Add spinner, change layout*/}
-        {mailList?.map((mail) => (
+        {mails?.map((mail) => (
           <Card className="w-1/4">
             <CardHeader>
               <CardTitle>{mail.subject}</CardTitle>
@@ -63,41 +51,7 @@ export default function MailList() {
                 From: {mail.from.split("@").at(1)}
               </CardDescription>
             </CardHeader>
-            <CardFooter className="flex justify-between">
-              <AlertDialog>
-                <AlertDialogTrigger>
-                  <Button variant="outline">
-                    <Trash2 className="mr-2" />
-                    Delete
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>
-                      Are you absolutely sure?
-                    </AlertDialogTitle>
-                    <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete
-                      this email
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction
-                      onClick={() => handleDeleteMail(mail.id)}
-                    >
-                      Delete
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
-              <Link href={`/mail/${mail.id}`}>
-                <Button>
-                  Open
-                  <MoveRight className="ml-2" />
-                </Button>
-              </Link>
-            </CardFooter>
+            <ActionButtons mailId={mail.id} deleteMail={handleDeleteMail} />
           </Card>
         ))}
       </div>

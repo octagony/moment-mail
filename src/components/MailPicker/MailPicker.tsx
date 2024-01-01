@@ -54,14 +54,7 @@ export default function MailPicker() {
         <div className="flex w-full max-w-sm items-center space-x-2">
           {/*TODO:Change input to another component*/}
           <Input placeholder="Email" value={mail} onChange={() => {}} />
-          <Button
-            type="submit"
-            onClick={() => {
-              toast({
-                description: "test",
-              });
-            }}
-          >
+          <Button type="submit">
             <RefreshCcw />
           </Button>
           <Button onClick={handleCopyToClipboard}>
