@@ -27,16 +27,8 @@ export default function MailList() {
 
   const { mails } = useMails<IMail[]>(domains?.at(0)!, domains?.at(1)!);
 
-  // useEffect(() => {
-  //   if (mails) {
-  //     setMailList(mails);
-  //   }
-  // });
-
   const handleDeleteMail = (deleteMailId: number) => {
     const updatedMails = mailList?.filter((mail) => mail.id !== deleteMailId);
-    console.log(updatedMails);
-    //setMailList(mails);
   };
 
   return (
@@ -46,7 +38,7 @@ export default function MailList() {
         {mails?.map((mail) => (
           <Card className="w-1/4">
             <CardHeader>
-              <CardTitle>{mail.subject}</CardTitle>
+              <CardTitle className="truncate mb-2">{mail.subject}</CardTitle>
               <CardDescription>
                 From: {mail.from.split("@").at(1)}
               </CardDescription>
