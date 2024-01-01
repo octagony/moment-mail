@@ -33,10 +33,10 @@ export default function MailList() {
 
   return (
     <div className="mt-12 flex flex-col gap-8">
-      <div className="flex flex-row flex-wrap gap-4 justify-center align-center">
+      <div className="flex flex-col md:flex-row flex-wrap gap-4 justify-center align-center">
         {/*TODO: Add spinner, change layout*/}
         {mails?.map((mail) => (
-          <Card className="w-1/4">
+          <Card className="w-full lg:w-1/4">
             <CardHeader>
               <CardTitle className="truncate mb-2">{mail.subject}</CardTitle>
               <CardDescription>

@@ -16,13 +16,11 @@ import Link from "next/link";
 import { IActionButtons } from "./ActionButton.interface";
 export default function ActionButton({ mailId, deleteMail }: IActionButtons) {
   return (
-    <CardFooter className="flex justify-between">
+    <CardFooter className="flex flex-col lg:flex-row gap-4 justify-between">
       <AlertDialog>
-        <AlertDialogTrigger>
-          <Button variant="outline">
-            <Trash2 className="mr-2" />
-            Delete
-          </Button>
+        <AlertDialogTrigger className="flex w-full justify-center border py-2 px-4 rounded-md">
+          <Trash2 className="mr-2" />
+          Delete
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -40,12 +38,12 @@ export default function ActionButton({ mailId, deleteMail }: IActionButtons) {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-      <Link href={`/mail/${mailId}`}>
-        <Button>
+      <Button className="w-full">
+        <Link className="flex items-center" href={`/mail/${mailId}`}>
           Open
           <MoveRight className="ml-2" />
-        </Button>
-      </Link>
+        </Link>
+      </Button>
     </CardFooter>
   );
 }

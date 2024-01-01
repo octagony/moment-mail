@@ -50,10 +50,16 @@ export default function MailPicker() {
   return (
     <>
       <div className="flex items-center flex-col gap-2">
-        <span>Your email is</span>
+        <h2 className="text-3xl my-4">Your email is</h2>
         <div className="flex w-full max-w-sm items-center space-x-2">
           {/*TODO:Change input to another component*/}
-          <Input placeholder="Email" value={mail} onChange={() => {}} />
+          <Input
+            className=""
+            disabled
+            placeholder="Email"
+            value={mail}
+            onChange={() => {}}
+          />
           <Button type="submit">
             <RefreshCcw />
           </Button>
