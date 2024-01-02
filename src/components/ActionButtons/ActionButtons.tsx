@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { MoveRight, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { IActionButtons } from "./ActionButton.interface";
+
 export default function ActionButton({ mailId, deleteMail }: IActionButtons) {
   return (
     <CardFooter className="flex flex-col lg:flex-row gap-4 justify-between">

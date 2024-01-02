@@ -1,17 +1,17 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Input } from "../ui/input";
-import axios from "axios";
 import useSWR, { useSWRConfig } from "swr";
 import useMailPicker from "@/hooks/useMailPicker";
 import { generateRandomEmail } from "@/utils/urlConstants";
-import { Button } from "../ui/button";
-import { RefreshCcw, Clipboard } from "lucide-react";
 import { useMailStore } from "@/store/mailStore";
-import { useToast } from "../ui/use-toast";
+import Loader from "../Loader/Loader";
+import { Button } from "@/components/ui/button";
+import { RefreshCcw, Clipboard } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
+import { Input } from "@/components/ui/input";
 
 export default function MailPicker() {
-  const { emailServer, mutate } = useMailPicker(generateRandomEmail);
+  const { emailServer, mutate, isLoading } = useMailPicker(generateRandomEmail);
   const [splitDomain, setSplitDomain] = useState<Array<string>>();
   const { toast } = useToast();
 
@@ -49,10 +49,10 @@ export default function MailPicker() {
 
   return (
     <>
+      {isLoading && <Loader />}
       <div className="flex items-center flex-col gap-2">
         <h2 className="text-3xl my-4">Your email is</h2>
         <div className="flex w-full max-w-sm items-center space-x-2">
-          {/*TODO:Change input to another component*/}
           <Input
             className=""
             disabled
