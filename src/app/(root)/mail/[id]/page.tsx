@@ -23,7 +23,7 @@ import {
   Frown,
 } from "lucide-react";
 import axios from "axios";
-import { axiosDownloadFile } from "@/utils/downloadHelper";
+import { downloadHelper } from "@/utils/downloadHelper";
 
 export default function Mail({ params }: { params: { id: number } }) {
   const domainInfo = useMailStore((store) => store.domainInfo);
@@ -32,6 +32,7 @@ export default function Mail({ params }: { params: { id: number } }) {
     domainInfo?.at(1)!,
     params.id,
   );
+
   console.log(domainInfo);
 
   const formatDate = () => {
@@ -47,7 +48,7 @@ export default function Mail({ params }: { params: { id: number } }) {
       params.id
     }&file=${createFileNameForUrl}`;
     try {
-      axiosDownloadFile(url, fileName);
+      downloadHelper(url, fileName);
     } catch (error: unknown) {
       if (error instanceof TypeError) {
         console.log(error?.message);

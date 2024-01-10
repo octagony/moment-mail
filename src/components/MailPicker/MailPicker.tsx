@@ -51,16 +51,16 @@ export default function MailPicker() {
     <>
       {isLoading && <Loader />}
       <div className="flex items-center flex-col gap-2">
-        <h2 className="text-3xl my-4">Your email is</h2>
+        <h2 className="text-3xl font-bold my-4">Your email is</h2>
         <div className="flex w-full max-w-sm items-center space-x-2">
           <Input
-            className=""
+            className="p-5"
             disabled
             placeholder="Email"
             value={mail}
             onChange={() => {}}
           />
-          <Button type="submit">
+          <Button type="submit" onClick={getNewMail}>
             <RefreshCcw />
           </Button>
           <Button onClick={handleCopyToClipboard}>
