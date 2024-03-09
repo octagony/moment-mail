@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+  align-items: center;
+  box-shadow: (0) rem(15) rem(30) rem(-4) $primary-box-shadow-color;
+  padding: rem(10);
+}
+
+.header__title {
+  @include resp-font(28, 24);
+  margin-left: 10px;
+}

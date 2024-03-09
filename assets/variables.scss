@@ -1,0 +1,50 @@
+@use "sass:math";
+$size-base: 16;
+
+@function stripUnit($value) {
+  @return math.div($value, ($value * 0 + 1));
+}
+
+@function rem($pxValue) {
+  @return #{math.div(stripUnit($pxValue), stripUnit($size-base))}rem;
+}
+
+$max-width: 1920;
+
+@mixin resp-font($pcSize, $mobSize) {
+  $primarySize: $pcSize - $mobSize;
+  $primaryMobSize: $primarySize + $primarySize * 0.7;
+  @media (max-width: $media-md) {
+    font-size: calc(
+      #{rem($mobSize)} + #{$primaryMobSize} *
+        ((100vw - 23.438rem) / #{$max-width})
+    );
+  }
+  @media (min-width: $media-md) {
+    font-size: calc(
+      #{rem($mobSize)} + #{$primarySize} * (100vw / #{$max-width})
+    );
+  }
+}
+
+$media-md: rem(768);
+$media-lg: rem(992);
+
+$fw-400: 400;
+$fw-500: 500;
+$fw-600: 600;
+$fw-700: 700;
+
+$fs-8: rem(8);
+$fs-10: rem(10);
+$fs-11: rem(11);
+$fs-12: rem(12);
+$fs-13: rem(13);
+$fs-14: rem(14);
+$fs-16: rem(16);
+$fs-17: rem(17);
+$fs-18: rem(18);
+$fs-20: rem(20);
+$fs-24: rem(24);
+$fs-28: rem(28);
+$fs-32: rem(32);
